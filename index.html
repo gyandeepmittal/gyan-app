@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Gyan — Download for Android</title>
+<meta name="description" content="Download and install the Gyan app on Android.">
+<style>
+  /* ------------------------------------------------------------------
+     Gyan download page. One file, no dependencies, works offline once
+     loaded. Served by GitHub Pages; the APK itself comes from GitHub
+     Releases (see DATA-* constants in the script at the bottom).
+     ------------------------------------------------------------------ */
+  :root {
+    --ink: #0E1B12;          /* app splash colour */
+    --ink-soft: #4A5A4E;
+    --line: #C9D3CC;
+    --paper: #FFFFFF;
+    --paper-soft: #F4F7F5;
+    --accent: #1DB954;       /* app icon colour */
+    --accent-ink: #0B6B2E;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    padding: 0 16px 48px;
+    background: var(--paper-soft);
+    color: var(--ink);
+    font-family: "Times New Roman", Times, "Noto Serif", serif;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  main { max-width: 560px; margin: 0 auto; }
+  header { text-align: center; padding: 36px 0 20px; }
+  .mark {
+    width: 84px; height: 84px; margin: 0 auto 12px;
+    border: 2px solid var(--ink); border-radius: 22px;
+    background: var(--accent); color: var(--paper);
+    font-size: 52px; font-weight: 700; line-height: 80px;
+    letter-spacing: -1px;
+  }
+  h1 { font-size: 34px; margin: 0; letter-spacing: 0.5px; }
+  .tagline { margin: 4px 0 0; color: var(--ink-soft); font-size: 16px; }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 18px 16px;
+    margin: 14px 0;
+  }
+  .card h2 {
+    font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0 0 10px; font-weight: 700;
+  }
+  .btn {
+    display: block; width: 100%;
+    padding: 18px 16px;
+    border: 2px solid var(--accent-ink); border-radius: 12px;
+    background: var(--accent); color: var(--paper);
+    font: inherit; font-size: 22px; font-weight: 700; text-align: center;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn small { display: block; font-size: 14px; font-weight: 400; opacity: 0.95; margin-top: 2px; }
+  .meta { margin: 10px 0 0; font-size: 15px; color: var(--ink-soft); text-align: center; }
+  .code-box {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    border: 1px dashed var(--ink); border-radius: 10px;
+    padding: 12px 14px; background: var(--paper-soft);
+  }
+  .code {
+    font-size: 30px; font-weight: 700; letter-spacing: 6px;
+    font-family: "Times New Roman", Times, serif;
+    word-break: break-all;
+  }
+  .copy {
+    flex: none; padding: 8px 14px;
+    border: 1px solid var(--ink); border-radius: 8px;
+    background: var(--paper); color: var(--ink);
+    font: inherit; font-size: 15px; cursor: pointer;
+  }
+  ol.steps { margin: 0; padding-left: 0; list-style: none; counter-reset: step; }
+  ol.steps li {
+    position: relative; padding: 10px 0 10px 44px;
+    border-top: 1px solid var(--line);
+  }
+  ol.steps li:first-child { border-top: 0; padding-top: 2px; }
+  ol.steps li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 10px;
+    width: 30px; height: 30px; line-height: 28px; text-align: center;
+    border: 1px solid var(--ink); border-radius: 50%;
+    font-weight: 700; font-size: 16px; background: var(--paper);
+  }
+  ol.steps li:first-child::before { top: 2px; }
+  ol.steps b { font-weight: 700; }
+  .note { font-size: 15px; color: var(--ink-soft); margin: 8px 0 0; }
+  .kbd {
+    display: inline-block; padding: 0 6px; border: 1px solid var(--line);
+    border-radius: 5px; background: var(--paper-soft); font-size: 15px; white-space: nowrap;
+  }
+  footer { text-align: center; font-size: 14px; color: var(--ink-soft); margin-top: 24px; }
+  footer a { color: var(--ink-soft); }
+  a.plain { color: var(--accent-ink); }
+  [hidden] { display: none !important; }
+  @media (min-width: 600px) {
+    body { font-size: 18px; }
+    .btn { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <header>
+    <div class="mark" aria-hidden="true">G</div>
+    <h1 id="app-name">Gyan</h1>
+    <p class="tagline">Chat, snaps, stories and calls with your people.</p>
+  </header>
+
+  <!-- Invite code: shown only when the link carries ?invite=CODE -->
+  <section class="card" id="invite-card" hidden>
+    <h2>Your invite code</h2>
+    <div class="code-box">
+      <span class="code" id="invite-code"></span>
+      <button class="copy" id="copy-btn" type="button">Copy</button>
+    </div>
+    <p class="note">Enter this code when you sign up. It puts you with the friend who invited you.</p>
+  </section>
+
+  <section class="card">
+    <h2>Get the app</h2>
+    <a class="btn" id="download-btn" href="#" rel="noopener">
+      Download Gyan for Android
+      <small id="download-sub">APK file · installs directly, no Play Store needed</small>
+    </a>
+    <p class="meta" id="release-meta">Latest version</p>
+  </section>
+
+  <section class="card">
+    <h2>How to install (about 1 minute)</h2>
+    <ol class="steps">
+      <li><b>Tap Download.</b> If Chrome says the file <i>"can harm your device"</i>, tap <span class="kbd">Download anyway</span>. That message appears for every app that is not from the Play Store.</li>
+      <li><b>Open the file</b> when the download finishes — tap <span class="kbd">Open</span> at the bottom of Chrome, or open it from your notifications or the <i>Files</i> app → <i>Downloads</i>.</li>
+      <li><b>Allow the install</b> if your phone asks. Tap <span class="kbd">Settings</span>, switch on <span class="kbd">Allow from this source</span>, then go back and tap <span class="kbd">Install</span>.</li>
+      <li><b>If Play Protect shows a warning</b>, tap <span class="kbd">More details</span> and then <span class="kbd">Install anyway</span>. Gyan is a private app shared by invitation, so Google has not reviewed it.</li>
+      <li><b>Open Gyan, create your account</b> with your email, and enter the invite code from above.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>Already have Gyan?</h2>
+    <p class="note" style="margin-top:0">The app updates itself. When it tells you a new version is ready, tap Download — installing it over the old one keeps your account and chats. You can also download the newest version from this page any time.</p>
+    <p class="note">iPhone: not available yet. Gyan is Android-only for now.</p>
+  </section>
+
+  <footer>
+    <span id="page-ver">Gyan download page</span> ·
+    <a id="all-versions" href="#" rel="noopener">All versions</a>
+  </footer>
+
+</main>
+
+<script>
+(function () {
+  // ---- Settings: change these two if the GitHub repo ever moves --------
+  var OWNER = 'gyandeepmittal';
+  var REPO  = 'gyan-app';
+  var ASSET = 'gyan.apk';
+  // -----------------------------------------------------------------------
+  var base = 'https://github.com/' + OWNER + '/' + REPO + '/releases';
+  var latestApk = base + '/latest/download/' + ASSET;
+
+  var dl = document.getElementById('download-btn');
+  dl.href = latestApk;
+  document.getElementById('all-versions').href = base;
+
+  // Invite code from ?invite=CODE (also accepts ?code=)
+  var params = new URLSearchParams(location.search);
+  var code = (params.get('invite') || params.get('code') || '').trim().toUpperCase();
+  if (code) {
+    document.getElementById('invite-code').textContent = code;
+    document.getElementById('invite-card').hidden = false;
+    var btn = document.getElementById('copy-btn');
+    btn.addEventListener('click', function () {
+      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done, function () { fallbackCopy(code, done); });
+      } else { fallbackCopy(code, done); }
+    });
+  }
+  function fallbackCopy(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'absolute'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  // Version, size and date of the latest release — best effort, from the
+  // public GitHub API. The download button works even if this fails.
+  var meta = document.getElementById('release-meta');
+  fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/releases/latest', { headers: { 'Accept': 'application/vnd.github+json' } })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (rel) {
+      if (!rel) return;
+      var asset = (rel.assets || []).filter(function (a) { return a.name === ASSET; })[0];
+      var parts = [];
+      if (rel.tag_name) {
+        // tags look like v1.2.0-5  →  "Version 1.2.0 (build 5)"
+        var m = /^v?([^-]+)(?:-(\d+))?$/.exec(String(rel.tag_name));
+        parts.push(m ? ('Version ' + m[1] + (m[2] ? ' (build ' + m[2] + ')' : '')) : ('Version ' + rel.tag_name));
+      }
+      if (asset && asset.size) parts.push((asset.size / 1048576).toFixed(0) + ' MB');
+      if (rel.published_at) {
+        var d = new Date(rel.published_at);
+        parts.push(d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }));
+      }
+      if (parts.length) meta.textContent = parts.join(' · ');
+      if (asset && asset.browser_download_url) dl.href = asset.browser_download_url; // exact file of this release
+    })
+    .catch(function () { /* keep the generic "latest" link */ });
+})();
+</script>
+</body>
+</html>
